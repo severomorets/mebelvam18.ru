@@ -1,0 +1,43 @@
+<div class="popup_form">
+  <div class="popup_form_inner">
+    <div class="popup_form_close">X</div>
+    <div class="popup_form_title">Оставить заявку</div>
+    <form action="handler.php" enctype="multipart/form-data" method="post">
+      <div class="form2"><input type="hidden" name="Название формы" value="">
+        <div class="field">
+          <div class="field_title">Введите имя</div>
+          <div class="field_description"></div>
+          <div class="field_input"><input type="text" required="required"
+                                          name="Введите имя" placeholder="Введите имя">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field_title">Введите E-mail</div>
+          <div class="field_description"></div>
+          <div class="field_input"><input type="text" required="required"
+                                          name="Введите E-mail"
+                                          placeholder="Введите E-mail"></div>
+        </div>
+        <div class="field">
+          <div class="field_title">Введите номер телефона</div>
+          <div class="field_description"></div>
+          <div class="field_input"><input type="text" required="required"
+                                          name="Введите номер телефона"
+                                          placeholder="Введите номер телефона"></div>
+        </div>
+        <div class="field">
+          <div class="field_input"><input type="submit" class="submit_btn surround"
+                                          data-action="thanks" data-url="" data-amount="0"
+                                          value="Отправить"
+                                          style="background-color:#009999;    border-radius: 0.5em; ;  box-shadow: 0; ">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="popup_form_text"> Нажимая на кнопку, Вы принимаете <a target="_blank"
+                                                                      data-cke-saved-href="/?personal_data=1"
+                                                                      href="/?personal_data=1">Положение</a>
+      и <a target="_blank" data-cke-saved-href="/?personal_data=2" href="/?personal_data=2">Согласие</a>
+      на обработку персональных данных. <br></div>
+  </div>
+</div>
