@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>ВАРИАНТ 1</h1>
+<button onclick="startSmartIdLogin()">
+    CLICK
+</button>
+<hr>
+<h1>ВАРИАНТ 2</h1>
+
+<script>
+    function startSmartIdLogin() {
+
+        //Oauth login window for Smart ID service, use correct client_id value here.
+        loginUri='https://id.smartid.ee/oauth/authorize?client_id=IHRsGQcdl9tAz8EoBh8yL00bvOIeNg8O&redirect_uri=http%3A%2F%2Ftalents.fund%3A8888%2Fverify&response_type=code';
+
+        //calculate login window size and position on screen
+        var w = 640;
+        var h = 640;
+        var left = (screen.width / 2) - (w / 2);
+        var top = (screen.height / 2) - (h / 2);
+
+        //open login window where user is identified
+        var win = window.open(loginUri, "Smart ID login", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+        //set timer and check response after every 100ms
+        var pollTimer = window.setInterval(function () {
+            try {
+                console.log(win.document.URL);
+
+                //if url contains code then user has been returned
+                if (win.document.URL.indexOf("code") !== -1) {
+
+                    //clear polling job
+                    window.clearInterval(pollTimer);
+                    var url = win.document.URL;
+
+                    //get authentication code value
+                    code = gup(url, 'code');
+
+                    //close the login popup window
+                    win.close();
+
+                    //use the code and redirect to the url that handles the server side login
+                    //from this on the process is regular Oauth login flow.
+                    window.location = "https://example.com/handlelogin?code="+code;
+                }
+            } catch (e) {
+            }
+        }, 100);
+    }
+
+    //helper function to extract url parameters
+    function gup(url, name) {
+        name = name.replace(/[[]/, "\[").replace(/[]]/, "\]");
+        var regexS = "[\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(url);
+        if (results == null)
+            return "";
+        else
+            return results[1];
+    }
+
+</script>
+</body>
+</html>
